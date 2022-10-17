@@ -1,16 +1,16 @@
-var run_game = false
-var dots = []
-var dot_speed = 3
+var run_game = false;
+var dots = [];
+var dot_speed = 3;
 
 // x values for main board
-var one = 300 + 75
-var two = 300 + 75*2
-var three = 300 + 75*3
-var four = 300 + 75*4
-var five = 300 + 75*5
+var one = 300 + 75;
+var two = 300 + 75*2;
+var three = 300 + 75*3;
+var four = 300 + 75*4;
+var five = 300 + 75*5;
 
 // y value of the last note created
-var last_y = 75
+var last_y = 75;
 
 
 function setup() {
@@ -18,14 +18,14 @@ function setup() {
   
   // create 30 notes at randomized y
   for (let i = 0; i < 30; i++) {
-    x_coord = random(5)
-    x_coord = x_coord <= 1 ? one : (x_coord <= 2 ? two : (x_coord <= 3 ? three : (x_coord <= 4 ? four : five)))
+    x_coord = random(5);
+    x_coord = x_coord <= 1 ? one : (x_coord <= 2 ? two : (x_coord <= 3 ? three : (x_coord <= 4 ? four : five)));
 
     // add dot to dots
-    dots.push({x: x_coord, y: last_y, hit: false})
+    dots.push({x: x_coord, y: last_y, hit: false});
     
     // set y higher by a random amount
-    last_y += random(-75, -125)
+    last_y += random(-75, -125);
   }
 }
 
@@ -44,8 +44,8 @@ function draw_board() {
 
 function manage_dots() {
   dots.forEach(dot => {
-    dot['y'] += dot_speed
-    circle(dot['x'], dot['y'], 30)
+    dot['y'] += dot_speed;
+    circle(dot['x'], dot['y'], 30);
     
     // FOR KIKI
     // if (dot['y'] >= 475) {
@@ -65,13 +65,13 @@ function manage_dots() {
 
 function draw() {
   background(200);
-  draw_board()
+  draw_board();
   
   fill(color(255, 59, 0))
-  manage_dots()
+  manage_dots();
 }
 
 
 function keyPressed() {
-  run_game = true
+  run_game = true;
 }

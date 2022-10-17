@@ -103,40 +103,40 @@ function manage_dots() {
     circle(dot['x'], dot['y'], 30);
     
     // check if note is in target zone
-    if (dot['y'] >= 450 && dot['y'] <= 500) {
+    if (dot['y'] >= 450 && dot['y'] <= 500 && dot['hit'] == false) {
         // check if correct key for the column was pressed
         if(key1 && dot['x'] == one) {
-          key1 = false;
           dot['hit'] = true;
           total_hits++;
         }
         if(key2 && dot['x'] == two) {
-          key2 = false;
           dot['hit'] = true;
           total_hits++;
         }
         if(key3 && dot['x'] == three) {
-          key3 = false;
           dot['hit'] = true;
           total_hits++;
         }
         if(key4 && dot['x'] == four) {
-          key4 = false;
           dot['hit'] = true;
           total_hits++;
         }
         if(key5 && dot['x'] == five) {
-          key5 = false;
           dot['hit'] = true;
           total_hits++;
         }
-     }
-    if (dots[29]['y'] > 600) {
-      end_round();
-    }
-    
+     }  
   });
   
+  key1 = false;
+  key2 = false;
+  key3 = false;
+  key4 = false;
+  key5 = false;
+  
+  if (dots[29]['y'] > 600) {
+    end_round();
+  }
 }
 
 //transition from one round to the next
@@ -145,6 +145,7 @@ function end_round() {
   total_hits = 0;
   num_rounds ++;
   run_game = false;
+  last_y = 75
   createDots();
 }
 

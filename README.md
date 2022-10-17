@@ -16,6 +16,8 @@ var five = 300 + 75*5;
 
 var assigned_nums = '1  2  3  4  5';
 
+var num_rounds = 1;
+
 var total_hits = 0;
 
 var key1 = false;
@@ -30,7 +32,11 @@ var last_y = 75;
 
 function setup() {
   createCanvas(800, 600);
+  createDots();
   
+}
+
+function createDots() {
   // create 30 notes at randomized y
   for (let i = 0; i < 30; i++) {
     x_coord = random(5);
@@ -42,6 +48,7 @@ function setup() {
     // set y higher by a random amount
     last_y += random(-75, -125);
   }
+  
 }
 
 function draw_board() {
@@ -55,6 +62,22 @@ function draw_board() {
   line(three, 75, three, 475);
   line(four, 75, four, 475);
   line(five, 75, five, 475);
+  
+  // target zone
+  fill(color(0, 204, 0));
+  rect(300, 500, 450, 50);
+}
+
+function draw_start_board() {
+  // main board
+  fill(color(255, 204, 0));
+  rect(300, 50, 450, 500);
+  
+  //instructions
+  fill(200, 0, 200);
+  textSize(28);
+  text("Press 's' to start round " + num_rounds, 385, 300)
+  
   
   // target zone
   fill(color(0, 204, 0));
@@ -108,22 +131,44 @@ function manage_dots() {
           total_hits++;
         }
      }
+    if (dots[29]['y'] > 600) {
+      end_round();
+    }
+    
   });
+  
+}
+
+//transition from one round to the next
+function end_round() {
+  dots = []
+  total_hits = 0;
+  num_rounds ++;
+  run_game = false;
+  createDots();
 }
 
 function draw() {
   background(200);
-  draw_board();
-  
   draw_sideboard();
   
-  fill(color(255, 59, 0))
-  manage_dots();
+  
+  if (run_game) {
+    draw_board();
+    fill(color(255, 59, 0))
+    manage_dots();
+  }
+  
+  else {
+    draw_start_board();
+  }
 }
 
 
 function keyPressed() {
-  run_game = true;
+  if (key == 's') {
+    run_game = true;
+  }
   
   if (key == '1') {
     key1 = true;

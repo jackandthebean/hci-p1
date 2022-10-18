@@ -100,32 +100,36 @@ function draw_sideboard() {
 function manage_dots() {
   dots.forEach(dot => {
     dot['y'] += dot_speed;
-    circle(dot['x'], dot['y'], 30);
     
-    // check if note is in target zone
-    if (dot['y'] >= 450 && dot['y'] <= 500 && dot['hit'] == false) {
-        // check if correct key for the column was pressed
-        if(key1 && dot['x'] == one) {
-          dot['hit'] = true;
-          total_hits++;
+    if (dot['hit'] == false) {
+      circle(dot['x'], dot['y'], 30);
+    
+    
+      // check if note is in target zone
+      if (dot['y'] >= 500 && dot['y'] <= 550 && dot['hit'] == false) {
+          // check if correct key for the column was pressed
+          if(key1 && dot['x'] == one) {
+            dot['hit'] = true;
+            total_hits++;
+          }
+          if(key2 && dot['x'] == two) {
+            dot['hit'] = true;
+            total_hits++;
+          }
+          if(key3 && dot['x'] == three) {
+            dot['hit'] = true;
+            total_hits++;
+          }
+          if(key4 && dot['x'] == four) {
+            dot['hit'] = true;
+            total_hits++;
+          }
+          if(key5 && dot['x'] == five) {
+            dot['hit'] = true;
+            total_hits++;
+          }
         }
-        if(key2 && dot['x'] == two) {
-          dot['hit'] = true;
-          total_hits++;
-        }
-        if(key3 && dot['x'] == three) {
-          dot['hit'] = true;
-          total_hits++;
-        }
-        if(key4 && dot['x'] == four) {
-          dot['hit'] = true;
-          total_hits++;
-        }
-        if(key5 && dot['x'] == five) {
-          dot['hit'] = true;
-          total_hits++;
-        }
-     }  
+      }
   });
   
   key1 = false;

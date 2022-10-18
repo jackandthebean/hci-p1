@@ -6,6 +6,9 @@ function preload(){
 var run_game = false;
 var dots = [];
 var dot_speed = 2;
+var normal_rounds = 3;
+var weird_rounds = 6;
+var normal_game = true;
 
 // x values for main board
 var one = 300 + 75;
@@ -14,7 +17,9 @@ var three = 300 + 75*3;
 var four = 300 + 75*4;
 var five = 300 + 75*5;
 
+
 var assigned_nums = '1  2  3  4  5';
+var inputs = ['1', '2', '3', '4', '5']
 
 var num_rounds = 1;
 
@@ -76,7 +81,19 @@ function draw_start_board() {
   //instructions
   fill(200, 0, 200);
   textSize(28);
-  text("Press 's' to start round " + num_rounds, 385, 300)
+  if (num_rounds <= normal_rounds + weird_rounds) {
+     text("Press 's' to start round " + num_rounds, 385, 300)
+    if (num_rounds == normal_rounds + 1){
+      text(" \t \t   ATTENTION: \n The keys have changed", 375, 380)
+
+  }
+    
+    
+  }
+  else {
+    text("Thanks for playing :)", 400, 300)
+  }
+ 
   
   
   // target zone
@@ -148,6 +165,11 @@ function end_round() {
   dots = []
   total_hits = 0;
   num_rounds ++;
+  if (num_rounds > normal_rounds){
+    normal_game = false;
+    assigned_nums = '5  1  4  3  2';
+    inputs = ['5', '1', '4', '3', '2']
+  }
   run_game = false;
   last_y = 75
   createDots();
@@ -171,23 +193,23 @@ function draw() {
 
 
 function keyPressed() {
-  if (key == 's') {
+  if (key == 's' && num_rounds <= normal_rounds + weird_rounds) {
     run_game = true;
   }
   
-  if (key == '1') {
+  if (key == inputs[0]) {
     key1 = true;
   }
-  if (key == '2') {
+  if (key == inputs[1]) {
     key2 = true;
   }
-  if (key == '3') {
+  if (key == inputs[2]) {
     key3 = true;
   }
-  if (key == '4') {
+  if (key == inputs[3]) {
     key4 = true;
   }
-  if (key == '5') {
+  if (key == inputs[4]) {
     key5 = true;
   }
 

@@ -165,7 +165,7 @@ function draw_start_board() {
   if (num_rounds <= normal_rounds + weird_rounds) {
      text("Press 's' to start round " + num_rounds, game_board_x + game_board_width/2 - 150, screen_vertical/2)
     if (num_rounds == normal_rounds + 1){
-      text(" \t \t   ATTENTION: \n The keys have changed", game_board_x + game_board_width/2 - 150, screen_vertical/2)
+      text(" \t \t   ATTENTION: \n The keys have changed", game_board_x + game_board_width/2 - 150, screen_vertical/2 + 49)
       document.getElementById("one").innerHTML = inputs[0];
       document.getElementById("two").innerHTML = inputs[1];
       document.getElementById("three").innerHTML = inputs[2];
@@ -177,7 +177,7 @@ function draw_start_board() {
 
   }
   else {
-    text("Thanks for playing :)", game_board_x + game_board_width/2 - 145, screen_vertical/2)
+    text("Thanks for playing :)", game_board_x + game_board_width/2 - 140, screen_vertical/2)
   }
 
 

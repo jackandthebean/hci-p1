@@ -1,10 +1,8 @@
 /*
 weird mapping game for hci
 by team Hot Coding Individuals
-
 Keyboard Options:
 's' to start
-
 */
 
 // Data
@@ -171,7 +169,7 @@ function draw_start_board() {
 
   }
   else {
-    text("Thanks for playing :)", game_board_x + game_board_width/2 - 150, screen_vertical/2)
+    text("Thanks for playing :)", game_board_x + game_board_width/2 - 145, screen_vertical/2)
   }
 
 
@@ -336,4 +334,3 @@ function download_results() {
 
   link.click();
 }
-

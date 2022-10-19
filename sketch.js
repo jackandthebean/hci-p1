@@ -23,6 +23,7 @@ let game_board_y = screen_vertical - game_board_height - margin;
 
 let target_zone_height = 90;
 let target_zone_y = game_board_y + game_board_height - target_zone_height;
+let target_zone_leeway = 22;
 
 let dot_diameter = 30;
 let line_interval = 75;
@@ -43,8 +44,8 @@ let finger_board_width = finger_board_height * 860 / 494;
 var run_game = false;
 var dots = [];
 var dot_speed = 2;
-var normal_rounds = 1;//3;
-var weird_rounds = 1;//6;
+var normal_rounds = 3;//3;
+var weird_rounds = 6;//6;
 var normal_game = true;
 
 var assigned_nums = '1  2  3  4  5';
@@ -196,7 +197,7 @@ function manage_dots() {
 
 
       // check if note is in target zone
-      if (dot['y'] >= target_zone_y && dot['y'] <= (target_zone_y + target_zone_height) && dot['hit'] == false) {
+      if (dot['y'] >= target_zone_y - target_zone_leeway && dot['y'] <= (target_zone_y + target_zone_height) && dot['hit'] == false) {
           // check if correct key for the column was pressed
           if(key1 && dot['x'] == one) {
             dot['hit'] = true;

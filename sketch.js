@@ -1,8 +1,11 @@
 /*
 weird mapping game for hci
 by team Hot Coding Individuals
+
 Keyboard Options:
 's' to start
+'d' to download results
+
 */
 
 // Data
@@ -14,11 +17,11 @@ let screen_vertical = window.innerHeight;
 let margin = 20;
 
 let game_board_width = 450;
-let game_board_height = 500;
+let game_board_height = 0.8 * screen_vertical;
 let game_board_x = screen_horizontal - game_board_width - margin;
 let game_board_y = screen_vertical - game_board_height - margin;
 
-let target_zone_height = 50;
+let target_zone_height = 90;
 let target_zone_y = game_board_y + game_board_height - target_zone_height;
 
 let dot_diameter = 30;
@@ -33,8 +36,8 @@ var five = game_board_x + line_interval * 5;
 
 // Finger Board Image
 let finger_board;
-let finger_board_height = screen_vertical/4;
-let finger_board_width = finger_board_height * 850 / 650;
+let finger_board_height = screen_vertical/5;
+let finger_board_width = finger_board_height * 860 / 494;
 
 // Game State
 var run_game = false;
@@ -160,9 +163,14 @@ function draw_start_board() {
   fill('white');
   textSize(28);
   if (num_rounds <= normal_rounds + weird_rounds) {
-     text("Press 's' to start round " + num_rounds, game_board_x + game_board_width/2 - 150, screen_vertical/2 - finger_board_height + 28)
+     text("Press 's' to start round " + num_rounds, game_board_x + game_board_width/2 - 150, screen_vertical/2)
     if (num_rounds == normal_rounds + 1){
       text(" \t \t   ATTENTION: \n The keys have changed", game_board_x + game_board_width/2 - 150, screen_vertical/2)
+      document.getElementById("one").innerHTML = inputs[0];
+      document.getElementById("two").innerHTML = inputs[1];
+      document.getElementById("three").innerHTML = inputs[2];
+      document.getElementById("four").innerHTML = inputs[3];
+      document.getElementById("five").innerHTML = inputs[4];
 
   }
 
@@ -279,7 +287,7 @@ function draw() {
 
   fill('white');
   textSize(28);
-  text('Hits: ' + total_hits + '/30', margin, screen_vertical/2 + finger_board_height/2);
+  text('Hits: ' + total_hits + '/30', margin, screen_vertical/2 + finger_board_height);
 
   if (run_game) {
     draw_board();

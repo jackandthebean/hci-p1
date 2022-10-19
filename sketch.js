@@ -1,7 +1,17 @@
-function preload(){
-  tab = loadImage("guitar-tab.png");
-  instructions = loadImage("instructions.png");
-}
+let screen_horizontal = window.innerWidth;
+let screen_vertical = window.innerHeight;
+let left = 20;
+
+let finger_board;
+let finger_board_width = screen_horizontal/4;
+let finger_board_height = finger_board_width * 650 / 850;
+
+let game_board_width = 450;
+//let game_board_height = 450;
+//let target_zone_height = 450;
+let game_board_x = screen_horizontal - game_board_width - left;
+let game_board_y = 50;
+//let target_zone_y = 450;
 
 var run_game = false;
 var dots = [];
@@ -11,11 +21,11 @@ var weird_rounds = 6;
 var normal_game = true;
 
 // x values for main board
-var one = 300 + 75;
-var two = 300 + 75*2;
-var three = 300 + 75*3;
-var four = 300 + 75*4;
-var five = 300 + 75*5;
+var one = game_board_x + 75;
+var two = game_board_x + 75*2;
+var three = game_board_x + 75*3;
+var four = game_board_x + 75*4;
+var five = game_board_x + 75*5;
 
 
 var assigned_nums = '1  2  3  4  5';
@@ -34,11 +44,13 @@ var key5 = false;
 // y value of the last note created
 var last_y = 75;
 
+function preload(){
+  finger_board = loadImage('finger_board.png');
+}
 
 function setup() {
-  createCanvas(800, 600);
+  createCanvas(screen_horizontal, screen_vertical);
   createDots();
-  
 }
 
 function createDots() {
@@ -49,35 +61,35 @@ function createDots() {
 
     // add dot to dots
     dots.push({x: x_coord, y: last_y, hit: false});
-    
+
     // set y higher by a random amount
     last_y += random(-75, -125);
   }
-  
+
 }
 
 function draw_board() {
   // main board
   fill(color(255, 204, 0));
-  rect(300, 50, 450, 500);
-  
+  rect(game_board_x, game_board_y, game_board_width, 500);
+
   // note lines
   line(one, 75, one, 475);
   line(two, 75, two, 475);
   line(three, 75, three, 475);
   line(four, 75, four, 475);
   line(five, 75, five, 475);
-  
+
   // target zone
   fill(color(0, 204, 0));
-  rect(300, 500, 450, 50);
+  rect(game_board_x, 500, game_board_width, 50);
 }
 
 function draw_start_board() {
   // main board
   fill(color(255, 204, 0));
-  rect(300, 50, 450, 500);
-  
+  rect(game_board_x, game_board_y, game_board_width, 500);
+
   //instructions
   fill(200, 0, 200);
   textSize(28);
@@ -87,41 +99,28 @@ function draw_start_board() {
       text(" \t \t   ATTENTION: \n The keys have changed", 375, 380)
 
   }
-    
-    
+
+
   }
   else {
     text("Thanks for playing :)", 400, 300)
   }
- 
-  
-  
+
+
+
   // target zone
   fill(color(0, 204, 0));
-  rect(300, 500, 450, 50);
-}
-
-function draw_sideboard() {
-  image(tab,30,20,150,150);
-  image(instructions,0,200,270,80);
-  
-  fill(0, 0, 0);
-  textSize(28);
-  text(assigned_nums, 36, 185);
-  
-  fill(200, 0, 200);
-  textSize(32);
-  text('Hits: ' + total_hits + '/30', 36, 440);
+  rect(game_board_x, 500, game_board_width, 50);
 }
 
 function manage_dots() {
   dots.forEach(dot => {
     dot['y'] += dot_speed;
-    
+
     if (dot['hit'] == false) {
       circle(dot['x'], dot['y'], 30);
-    
-    
+
+
       // check if note is in target zone
       if (dot['y'] >= 500 && dot['y'] <= 550 && dot['hit'] == false) {
           // check if correct key for the column was pressed
@@ -148,13 +147,13 @@ function manage_dots() {
         }
       }
   });
-  
+
   key1 = false;
   key2 = false;
   key3 = false;
   key4 = false;
   key5 = false;
-  
+
   if (dots[29]['y'] > 600) {
     end_round();
   }
@@ -176,27 +175,30 @@ function end_round() {
 }
 
 function draw() {
-  background(200);
-  draw_sideboard();
+  background('#92C471');
+  image(finger_board, left, screen_vertical/2 - finger_board_height, finger_board_width, finger_board_height);
   
-  
+  fill(200, 0, 200);
+  textSize(32);
+  text('Hits: ' + total_hits + '/30', 36, 440);
+
   if (run_game) {
     draw_board();
     fill(color(255, 59, 0))
     manage_dots();
   }
-  
+
   else {
     draw_start_board();
   }
 }
 
-
 function keyPressed() {
   if (key == 's' && num_rounds <= normal_rounds + weird_rounds) {
     run_game = true;
+    document.getElementById("instruction").style = "display: none";
   }
-  
+
   if (key == inputs[0]) {
     key1 = true;
   }
@@ -214,3 +216,4 @@ function keyPressed() {
   }
 
 }
+

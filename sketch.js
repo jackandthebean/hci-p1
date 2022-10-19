@@ -43,9 +43,9 @@ let finger_board_width = finger_board_height * 860 / 494;
 // Game State
 var run_game = false;
 var dots = [];
-var dot_speed = 2;
-var normal_rounds = 3;//3;
-var weird_rounds = 6;//6;
+var dot_speed = 90;
+var normal_rounds = 2;
+var weird_rounds = 4;
 var normal_game = true;
 
 var assigned_nums = '1  2  3  4  5';
@@ -164,21 +164,29 @@ function draw_start_board() {
   fill('white');
   textSize(28);
   if (num_rounds <= normal_rounds + weird_rounds) {
-     text("Press 's' to start round " + num_rounds, game_board_x + game_board_width/2 - 150, screen_vertical/2)
-    if (num_rounds == normal_rounds + 1){
-      text(" \t \t   ATTENTION: \n The keys have changed", game_board_x + game_board_width/2 - 150, screen_vertical/2 + 49)
+     text("Press 's' to start round " + num_rounds, game_board_x + game_board_width/2 - 150, screen_vertical/2);
+    if (num_rounds == 2) {
+      text("\t \t \t \t Nice job!\nLet's do this one more time!", game_board_x + game_board_width/2 - 150, screen_vertical/2 + 49);
+    }
+    
+    else if (num_rounds == normal_rounds + 1) {
+      text(" \t \t \t \t ATTENTION: \n \t \t The keys have changed! \nCheck the new version on the left!", game_board_x + game_board_width/2 - 210, screen_vertical/2 + 49)
       document.getElementById("one").innerHTML = inputs[0];
       document.getElementById("two").innerHTML = inputs[1];
       document.getElementById("three").innerHTML = inputs[2];
       document.getElementById("four").innerHTML = inputs[3];
       document.getElementById("five").innerHTML = inputs[4];
-
-  }
+    }
+    
+    else if (num_rounds == normal_rounds + 2) {
+      text("\t \t \t \t Not bad!\nThat was prety hard right?\n \t \t \t Let's try again!", game_board_x + game_board_width/2 - 160, screen_vertical/2 + 49);
+    }
 
 
   }
   else {
-    text("Thanks for playing :)", game_board_x + game_board_width/2 - 140, screen_vertical/2)
+    text("Thanks for playing :)", game_board_x + game_board_width/2 - 140, screen_vertical/2);
+    text("Press 'd' to download results", game_board_x + game_board_width/2 - 165, screen_vertical/2 + 49);
   }
 
 

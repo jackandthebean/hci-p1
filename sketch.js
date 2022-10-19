@@ -102,8 +102,31 @@ function createDots() {
   // create 30 notes at randomized y
   for (let i = 0; i < 30; i++) {
     x_coord = random(5);
-    x_coord = x_coord <= 1 ? one : (x_coord <= 2 ? two : (x_coord <= 3 ? three : (x_coord <= 4 ? four : five)));
 
+    if (x_coord <= 1) {
+      x_coord = one;
+      ones += 1;
+    }
+
+    else if (x_coord <= 2) {
+      x_coord = two;
+      twos += 1;
+    }
+
+    else if (x_coord <= 3) {
+      x_coord = three;
+      threes += 1;
+    }
+
+    else if (x_coord <= 4) {
+      x_coord = four;
+      fours += 1;
+    }
+
+    else if (x_coord <= 5) {
+      x_coord = five;
+      fives += 1;
+    }
     // add dot to dots
     dots.push({x: x_coord, y: last_y, hit: false});
 

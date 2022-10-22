@@ -1,11 +1,9 @@
 /*
 weird mapping game for hci
 by team Hot Coding Individuals
-
 Keyboard Options:
 's' to start
 'd' to download results
-
 */
 
 // Data
@@ -43,13 +41,25 @@ let finger_board_width = finger_board_height * 860 / 494;
 // Game State
 var run_game = false;
 var dots = [];
-var dot_speed = 90;
-var normal_rounds = 2;
-var weird_rounds = 4;
-var normal_game = true;
+var dot_speed = 2;
+var normal_rounds = 3;
+var weird_rounds = 3;
 
-var assigned_nums = '1  2  3  4  5';
-var inputs = ['1', '2', '3', '4', '5']
+
+
+var normal_arr = ['1', '2', '3', '4', '5'];
+var weird_arr = ['5', '1', '4', '3', '2'];
+var arrs = [normal_arr, weird_arr];
+var normal_game = Math.random() > 0.5 ? true : false;
+var inputs = arrs[Number(normal_game)];
+
+document.getElementById("one").innerHTML = inputs[0];
+      document.getElementById("two").innerHTML = inputs[1];
+      document.getElementById("three").innerHTML = inputs[2];
+      document.getElementById("four").innerHTML = inputs[3];
+      document.getElementById("five").innerHTML = inputs[4];
+    
+
 
 var key1 = false;
 var key2 = false;
@@ -165,7 +175,7 @@ function draw_start_board() {
   textSize(28);
   if (num_rounds <= normal_rounds + weird_rounds) {
      text("Press 's' to start round " + num_rounds, game_board_x + game_board_width/2 - 150, screen_vertical/2);
-    if (num_rounds == 2) {
+    if (num_rounds % normal_rounds == 0) {
       text("\t \t \t \t Nice job!\nLet's do this one more time!", game_board_x + game_board_width/2 - 150, screen_vertical/2 + 49);
     }
     
@@ -178,7 +188,7 @@ function draw_start_board() {
       document.getElementById("five").innerHTML = inputs[4];
     }
     
-    else if (num_rounds == normal_rounds + 2) {
+    else if (num_rounds % normal_rounds == 2) {
       text("\t \t \t \t Not bad!\nThat was prety hard right?\n \t \t \t Let's try again!", game_board_x + game_board_width/2 - 160, screen_vertical/2 + 49);
     }
 
@@ -281,9 +291,8 @@ function end_round() {
 
   num_rounds ++;
   if (num_rounds > normal_rounds){
-    normal_game = false;
-    assigned_nums = '5  1  4  3  2';
-    inputs = ['5', '1', '4', '3', '2']
+    normal_game = !normal_game;
+    inputs = arrs[Number(normal_game)];
   }
   run_game = false;
   last_y = game_board_y + dot_diameter/2;

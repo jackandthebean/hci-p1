@@ -83,11 +83,18 @@ var threes = 0;
 var fours = 0;
 var fives = 0;
 
+let one_note;
+
 // y value of the last note created
 var last_y = game_board_y + dot_diameter/2;
 
 function preload(){
   finger_board = loadImage('finger_board.png');
+  one_note = loadSound('c1.wav');
+  two_note = loadSound('d1.wav');
+  three_note = loadSound('e1.wav');
+  four_note = loadSound('f1.wav');
+  five_note = loadSound('g1.wav');
 }
 
 function setup() {
@@ -218,26 +225,31 @@ function manage_dots() {
       if (dot['y'] >= target_zone_y - target_zone_leeway && dot['y'] <= (target_zone_y + target_zone_height) && dot['hit'] == false) {
           // check if correct key for the column was pressed
           if(key1 && dot['x'] == one) {
+            one_note.play();
             dot['hit'] = true;
             total_hits++;
             one_hits++;
           }
           if(key2 && dot['x'] == two) {
+            two_note.play();
             dot['hit'] = true;
             total_hits++;
             two_hits++;
           }
           if(key3 && dot['x'] == three) {
+            three_note.play();
             dot['hit'] = true;
             total_hits++;
             three_hits++;
           }
           if(key4 && dot['x'] == four) {
+            four_note.play();
             dot['hit'] = true;
             total_hits++;
             four_hits++;
           }
           if(key5 && dot['x'] == five) {
+            five_note.play();
             dot['hit'] = true;
             total_hits++;
             five_hits++;
